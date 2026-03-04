@@ -166,5 +166,3 @@ MIT License — free to use for personal and educational purposes.
 - GitHub: [@prernapandit1](https://github.com/prernapandit1)
 
 ---
-
-*Built as part of Microsoft SWE Internship Portfolio Projects 2026*
