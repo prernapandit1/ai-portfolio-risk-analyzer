@@ -20,7 +20,7 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 # ── Constants ──────────────────────────────────────────────────────────────────
-DEFAULT_MODEL = "gpt-3.5-turbo"
+DEFAULT_MODEL = "llama-3.3-70b-versatile"
 MAX_TOKENS = 300          # Generous ceiling; prompt instructs <200 word response
 TEMPERATURE = 0.4         # Slightly creative but grounded
 # ──────────────────────────────────────────────────────────────────────────────
@@ -95,12 +95,12 @@ class AIAdvisor:
             model_name: OpenAI model to use (default: gpt-3.5-turbo).
 
         Raises:
-            EnvironmentError: If OPENAI_API_KEY is not set.
+            EnvironmentError: If GROQ_API_KEY is not set.
         """
-        api_key = os.getenv("OPENAI_API_KEY")
+        api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise EnvironmentError(
-                "OPENAI_API_KEY is not set. "
+                "GROQ_API_KEY is not set. "
                 "Add it to backend/.env or export it as an environment variable."
             )
 
@@ -446,17 +446,17 @@ class FallbackAdvisor:
 
 def get_advisor() -> "AIAdvisor | FallbackAdvisor":
     """
-    Factory function that returns an ``AIAdvisor`` if OPENAI_API_KEY is set,
+    Factory function that returns an ``AIAdvisor`` if GROQ_API_KEY is set,
     otherwise returns a ``FallbackAdvisor`` for development/demo use.
 
     Returns:
         AIAdvisor or FallbackAdvisor instance.
     """
     load_dotenv()
-    if os.getenv("OPENAI_API_KEY"):
+    if os.getenv("GROQ_API_KEY"):
         try:
             return AIAdvisor()
         except Exception as exc:
             logger.warning("Could not initialise AIAdvisor (%s). Using fallback.", exc)
-    logger.info("OPENAI_API_KEY not found — using rule-based FallbackAdvisor.")
+    logger.info("GROQ_API_KEY not found — using rule-based FallbackAdvisor.")
     return FallbackAdvisor()
