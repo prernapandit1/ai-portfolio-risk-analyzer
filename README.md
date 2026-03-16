@@ -1,4 +1,4 @@
-# 📈 AI Investment Risk Analyzer
+# 📈 Stock Investment Risk Analyzer
 
 > A full-stack ML web application that analyzes stock portfolio risk using real-time data, Monte Carlo simulation, LSTM volatility forecasting, and AI-powered rebalancing advice.
 
